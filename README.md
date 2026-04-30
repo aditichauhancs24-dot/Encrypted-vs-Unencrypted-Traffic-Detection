@@ -12,6 +12,9 @@ Mini cybersecurity project that analyzes encrypted and unencrypted network traff
 
 
 PERSON 1 : CHANCHAL(Responsibility: Capture network packets and prepare dataset.)[Ch1 ,Ch2 and Ch3 png are her work images and also scv packets file.csv]
+
+
+
 Step 1:
 Tools Used:
 Kali Linux
@@ -32,6 +35,9 @@ File → Export → CSV
 
 
 PERSON 2 : ADITI CHAUHAN (Responsibility: Clean the CSV → Add features → Label data → Prepare for ML  )[Ad1, Ad2 , Ad3 png are her work images and also the processed_dataset.csv file and process_csv.py file]
+
+
+
  Step 1:Check CSV File
  Step 2 — Install Required Libraries
 Open Command Prompt:
