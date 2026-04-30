@@ -170,7 +170,7 @@ plt.xlabel("Traffic Type")
 plt.ylabel("Count")
 plt.show()
 
-# Step 10: Save model
+ 
 with open("traffic_model.pkl", "wb") as f:
     pickle.dump(model, f)
 
