@@ -4,4 +4,4 @@
 3) Aditi Chauhan - GitHub: aditichauhancs24-dot
 
 # Encrypted-vs-Unencrypted-Traffic-Detection
-Mini cybersecurity project that analyzes encrypted and unencrypted network traffic using Wireshark, TLS , metadata , basic  and machine learning.
+Mini cybersecurity project that analyzes encrypted and unencrypted network traffic .
