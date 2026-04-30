@@ -176,3 +176,7 @@ with open("traffic_model.pkl", "wb") as f:
 
 print("\nModel saved as traffic_model.pkl")
 
+
+
+Added project report pdf and images
+
