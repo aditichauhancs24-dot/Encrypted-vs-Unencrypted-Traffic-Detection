@@ -57,23 +57,23 @@ Step 7 — Save Processed Dataset
 Overall code:
 import pandas as pd
 
-# Step 1: Read CSV file
+ 
 print("Reading CSV file...")
 
 df = pd.read_csv("csv packets file.csv")
 
-# Step 2: Show first rows
+ 
 print(df.head())
 
-# Step 3: Show column names
+ 
 print("Columns in dataset:")
 print(df.columns)
 
-# Step 4: Clean data
+ 
 df = df.dropna()
 df = df.drop_duplicates()
 
-# Step 5: Label traffic
+ 
 def label_traffic(row):
 
     if "443" in str(row["Info"]):
@@ -85,10 +85,13 @@ def label_traffic(row):
 
 df["Label"] = df.apply(label_traffic, axis=1)
 
-# Step 6: Save new dataset
+ 
 df.to_csv("processed_dataset.csv", index=False)
 
 print("Dataset cleaned, labeled and saved successfully!")
+
+
+
 
 
  
@@ -118,48 +121,46 @@ from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score, classification_report
 
-# Step 1: Load dataset
+ 
 print("Loading dataset...")
 data = pd.read_csv("processed_dataset.csv")
 
 print("\nDataset Preview:")
 print(data.head())
 
-# Step 2: Select features and label
-# (Change column names if different)
+ 
 X = data[["PacketLength", "Protocol", "SourcePort", "DestinationPort"]]
 y = data["Label"]
 
-# Step 3: Split data
+ 
 X_train, X_test, y_train, y_test = train_test_split(
     X, y, test_size=0.3, random_state=42
 )
 
-# Step 4: Train model
+ 
 print("\nTraining model...")
 model = RandomForestClassifier(n_estimators=100, random_state=42)
 model.fit(X_train, y_train)
 
-# Step 5: Predictions
+ 
 predictions = model.predict(X_test)
 
-# Step 6: Accuracy
+ 
 accuracy = accuracy_score(y_test, predictions)
 print("\nModel Accuracy:", accuracy)
 
-# Step 7: Detailed Report
+ 
 print("\nClassification Report:")
 print(classification_report(y_test, predictions))
 
-# Step 8: Count encrypted vs unencrypted
+ 
 encrypted = sum(predictions)
 unencrypted = len(predictions) - encrypted
 
 print("\nResults:")
 print("Encrypted Traffic:", encrypted)
 print("Unencrypted Traffic:", unencrypted)
-
-# Step 9: Graph
+ 
 labels = ["Encrypted", "Unencrypted"]
 values = [encrypted, unencrypted]
 
