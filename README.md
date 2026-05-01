@@ -119,23 +119,22 @@ Step 6: Generate Report
 
 OVERALL CODE:
 
- import pandas as pd
-import matplotlib.pyplot as plt
-import pickle
+import pandas as pd
 
 from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestClassifier
-from sklearn.metrics import accuracy_score, classification_report
+from sklearn.metrics import accuracy_score, confusion_matrix
+
+import matplotlib.pyplot as plt
+
 
  
-print("Loading dataset...")
 data = pd.read_csv("processed_dataset.csv")
 
-print("\nDataset Preview:")
+print("Dataset Loaded\n")
 print(data.head())
-
  
-X = data[["PacketLength", "Protocol", "SourcePort", "DestinationPort"]]
+X = data[["Length","Protocol"]]
 y = data["Label"]
 
  
@@ -144,43 +143,46 @@ X_train, X_test, y_train, y_test = train_test_split(
 )
 
  
-print("\nTraining model...")
-model = RandomForestClassifier(n_estimators=100, random_state=42)
+model = RandomForestClassifier()
+
 model.fit(X_train, y_train)
+
+print("\nModel Training Completed")
 
  
 predictions = model.predict(X_test)
 
  
 accuracy = accuracy_score(y_test, predictions)
+
 print("\nModel Accuracy:", accuracy)
 
- 
-print("\nClassification Report:")
-print(classification_report(y_test, predictions))
 
  
 encrypted = sum(predictions)
 unencrypted = len(predictions) - encrypted
 
-print("\nResults:")
-print("Encrypted Traffic:", encrypted)
-print("Unencrypted Traffic:", unencrypted)
+print("\nEncrypted packets:", encrypted)
+print("Unencrypted packets:", unencrypted)
+
+ 
+cm = confusion_matrix(y_test, predictions)
+
+print("\nConfusion Matrix:\n", cm)
+
+
  
 labels = ["Encrypted", "Unencrypted"]
 values = [encrypted, unencrypted]
 
 plt.bar(labels, values)
-plt.title("Traffic Classification Result")
+
+plt.title("Traffic Detection Result")
+
 plt.xlabel("Traffic Type")
-plt.ylabel("Count")
+plt.ylabel("Packet Count")
+
 plt.show()
-
- 
-with open("traffic_model.pkl", "wb") as f:
-    pickle.dump(model, f)
-
-print("\nModel saved as traffic_model.pkl")
 
 
 
